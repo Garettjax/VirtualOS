@@ -1,26 +1,34 @@
 from PCB import PCB
+class Loader:
 
-file = open ("program_file")
+    def __init__(self):
+        self.run()
 
-for line in file:
-    # print(line)
-    if "//" in line:
-        card = line[3: int(len(line) - 1)]
-        pcb = PCB()
+    def run(self):
+        try:
+            file = open("program_file")
 
-        arr = card.split(" ")
-        pcb.type = arr[0]
-        pcb.jobId = arr[1]
-        pcb.numberOfJobs = int("0x" + arr[2], 0)
-        pcb.priority = arr[3]
+            for line in file:
+                # print(line)
+                if "//" in line:
+                    card = line[3: int(len(line) - 1)]
+                    pcb = PCB()
 
-        # print(card)
-        print(pcb.type)
-        print(pcb.jobId)
-        print(pcb.priority)
-        print(pcb.numberOfJobs)
-    else:
-        print(line)
+                    arr = card.split(" ")
+                    pcb.type = arr[0]
+                    pcb.jobId = arr[1]
+                    pcb.numberOfJobs = int("0x" + arr[2], 0)
+                    pcb.priority = arr[3]
 
+                    # print(card)
+                    print(pcb.type)
+                    print(pcb.jobId)
+                    print(pcb.priority)
+                    print(pcb.numberOfJobs)
+                else:
+                    print(line)
 
-file.close()
+            file.close()
+        except Exception as ex:
+            print(ex.args)
+
